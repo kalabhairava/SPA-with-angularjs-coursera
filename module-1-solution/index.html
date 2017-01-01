@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Check if my lunch is too much!
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body ng-controller="MainCtrl">
+        <h3>What do you want to have for your lunch? (Empty items are not considered)</h3>
+        <input type="text" placeholder="Enter the items separated by comma" ng-model="userInput"> <br>
+        <p>{{message}}</p>
+        <button type="button" ng-click="checkIfTooMuch()">Check if too much!</button>
+    </body>
+</html>
