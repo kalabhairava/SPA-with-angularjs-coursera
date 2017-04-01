@@ -1,0 +1,20 @@
+.list-container {
+  margin: 1em;
+}
+
+
+.list {
+  width: 49%;
+  margin: 1em;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.list-item {
+  margin-bottom: 0.3em;
+  padding: 0.3em;
+}
+
+.list-item button {
+  float: right;
+}
