@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-<html ng-app="shoppingApp">
+<html ng-app="ShoppingApp">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shopping App</title>
     <!-- Libraries -->
+    <!-- IMP: Always include angular library before any custom scripts, otherwise, the script won't recognize the angular code  -->
     <script src="angular.min.js"></script>
     <link rel="stylesheet" href="bootstrap.min.css" type="text/css" />
     <!-- Custom styles -->
     <link rel="stylesheet" href="styles.css" type="text/css"/>
+    <!-- Custom scripts -->
     <script src="app.js"></script>
   </head>
-  <body ng-controller="shoppingAppCtrl">
+  <body>
     <div class="row list-container">
-      <div id="toBuyList" class="col-md-6 col-sm-12 list">
+      <div id="toBuyList" class="col-md-6 col-sm-12 list" ng-controller="ToBuyListCtrl as buyItemCtrl">
         <h2>TO BUY:</h2>
-        <span ng-if="!toBuyList.length">Everything is bought!</span>
+        <span ng-if="!buyItemCtrl.toBuyList.length">Everything is bought!</span>
         <ul>
-          <li class="list-item" ng-repeat="item in toBuyList">Buy {{item.quantity}} {{item.name}}
-          <button type="button" ng-click="buy($index)">Bought</button><br>
+          <li class="list-item" ng-repeat="item in buyItemCtrl.toBuyList">Buy {{item.quantity}} {{item.name}}
+          <button type="button" ng-click="buyItemCtrl.buy($index)">Bought</button><br>
           </li>
         </ul>
       </div>
-      <div id="boughtList" class="col-md-6 col-sm-12 list">
+      <div id="boughtList" class="col-md-6 col-sm-12 list" ng-controller="AlreadyBoughtListCtrl as boughtListCtrl">
         <h2>ALREADY BOUGHT:</h2>
-        <span ng-if="!boughtList.length">Nothing bought yet</span>
+        <span ng-if="!boughtListCtrl.alreadyBoughtList.length">Nothing bought yet</span>
         <ul>
-          <li class="list-item" ng-repeat="item in boughtList">Bought {{item.quantity}} {{item.name}}
+          <li class="list-item" ng-repeat="item in boughtListCtrl.alreadyBoughtList">Bought {{item.quantity}} {{item.name}}
           </li>
         </ul>
       </div>
