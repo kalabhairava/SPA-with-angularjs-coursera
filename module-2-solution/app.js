@@ -1,41 +1,59 @@
 (function () {
   'use strict';
 
-  angular.module('shoppingApp', [])
-        .controller('shoppingAppCtrl', shoppingAppCtrl);
+  angular.module('ShoppingApp',[])
+          .controller('ToBuyListCtrl', ToBuyListCtrl)
+          .controller('AlreadyBoughtListCtrl', AlreadyBoughtListCtrl)
+          .service('ShoppingService', ShoppingService);
 
-  shoppingAppCtrl.$inject = ['$scope'];
-  function shoppingAppCtrl($scope) {
-    $scope.toBuyList = [
-      {
-        "name": "cookies",
-        "quantity": 10
-      },
-      {
-        "name": "Chips",
-        "quantity": 3
-      },
-      {
-        "name": "Dates",
-        "quantity": 2
-      },
-      {
-        "name": "Cashews",
-        "quantity": 5
-      },
-      {
-        "name": "Chocolates",
-        "quantity": 100
-      }
-    ];
+  ToBuyListCtrl.$inject = ['ShoppingService'];
 
-  $scope.boughtList = [];
+  function ToBuyListCtrl (ShoppingService) {
+      var buyItemCtrl = this;
 
-  $scope.buy = function (index) {
-      $scope.boughtList.push($scope.toBuyList[index]);
-      $scope.toBuyList.splice(index, 1);
+      buyItemCtrl.toBuyList = ShoppingService.toBuyList;
+      buyItemCtrl.buy = function(index) {
+        ShoppingService.buy(index);
+      };
+  };
+
+  AlreadyBoughtListCtrl.$inject = ['ShoppingService'];
+
+  function AlreadyBoughtListCtrl (ShoppingService) {
+    this.alreadyBoughtList = ShoppingService.alreadyBoughtList;
+  };
+
+  function ShoppingService() {
+
+    var service = this;
+    service.toBuyList = [
+          {
+            "name": "cookies",
+            "quantity": 10
+          },
+          {
+            "name": "Chips",
+            "quantity": 3
+          },
+          {
+            "name": "Dates",
+            "quantity": 2
+          },
+          {
+            "name": "Cashews",
+            "quantity": 5
+          },
+          {
+            "name": "Chocolates",
+            "quantity": 100
+          }
+        ];
+
+    service.alreadyBoughtList = [];
+
+    service.buy = function(index) {
+      service.alreadyBoughtList.push(service.toBuyList[index]);
+      service.toBuyList.splice(index, 1);
     };
-
-    console.log("!BoughtList = ", !$scope.boughtList.length);
   };
 })();
